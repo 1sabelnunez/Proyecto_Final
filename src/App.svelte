@@ -10,7 +10,7 @@
  
   /* Variables para el scroller1 */
   let count;
-  let index;
+  let index=0;
   let offset;
   let progress;
   let top = 0.1;
@@ -26,53 +26,62 @@
   let threshold2 = 0.5;
   let bottom2 = 0.9;
 
-    /* Charts */
-    let charts = [
-    "img1.png",
-    "img2.png",
-    "img3.png",
-    "img4.png",
-    "img5.png"
-  ];
+/* Charts */
+let charts = [
+  "images/img1.png",
+  "images/img2.png",
+  "images/img3.png",
+  "images/img4.png",
+  "images/img5.png"
+];
 
-  /* Variable para el index */
-  //let index = 0; // Índice inicial para las imágenes
-
-  /* Función para cambiar el índice */
-  function changeImage(newIndex) {
-    index = newIndex;
-  }
+/* Función para cambiar el índice */
+function changeImage(newIndex) {
+  index = newIndex;
+  console.log("Nuevo índice:", index);
+}
 </script>
 
 <main>
   <div class="image_container">
-    <img src="{charts[index]}" alt="Chart {index + 1}" class="chart_image" />
+    {#each charts as chart, i}
+      <img src={chart} alt="Chart {i + 1}" class="chart_image {index === i ? 'active' : ''}" />
+    {/each}
   </div>
 
   <div class="button_container">
-    <button on:click={() => changeImage(0)}>Imagen 1</button>
-    <button on:click={() => changeImage(1)}>Imagen 2</button>
-    <button on:click={() => changeImage(2)}>Imagen 3</button>
-    <button on:click={() => changeImage(3)}>Imagen 4</button>
-    <button on:click={() => changeImage(4)}>Imagen 5</button>
+    {#each charts as chart, i}
+      <button on:click={() => changeImage(i)}>Imagen {i + 1}</button>
+    {/each}
   </div>
-
 </main>
+
+
 <style>
   .image_container {
+    position: relative; /* Contenedor relativo para posicionamiento absoluto de las imágenes */
     text-align: center;
-    margin-top: 20px;
+    margin-top: 100px;
   }
 
   .chart_image {
-    max-width: 100%;
+    position: absolute; /* Imágenes posicionadas absolutamente dentro del contenedor */
+    top: 50;
+    left: 5;
+    width: 50%;
     height: auto;
+    opacity: 0; /* Inicialmente ocultas */
+    transition: opacity 0.5s ease-in-out; /* Transición suave de opacidad */
+  }
+
+  .chart_image.active {
+    opacity: 1; /* Mostrar la imagen activa */
   }
 
   .button_container {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 10px;
   }
 
   button {
@@ -81,4 +90,4 @@
     font-size: 16px;
     cursor: pointer;
   }
-  </style>
+</style>
