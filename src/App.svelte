@@ -36,15 +36,14 @@
     console.log("Nuevo índice:", index);
   }
 
-  /* Cargar datos al montar el componente */
-  onMount(() => {
-    d3.csv("./data/deportistas.csv", d3.autoType).then((data) => {
-      // Procesar datos CSV si es necesario
-    });
-  });
 </script>
 
-<main style="background-color: #242E47;">
+<main>
+  <div class="portada_container">
+    <!-- Imagen de portada -->
+    <img src="images/portada.png" alt="Portada" class="portada_image" />
+  </div>
+
   <div class="button_container">
     <!-- Botones para cambiar las imágenes -->
     {#each charts as chart, i}
@@ -59,55 +58,66 @@
     {/each}
   </div>
 </main>
-
 <style>
-  /* Estilos para el contenedor de botones */
-  .button_container {
-    margin-top: 0px;
-    display: flex; /* Utilizar flexbox */
-    justify-content: center; /* Centrar contenido horizontalmente */
-  }
+    .portada_container {
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 60px;
+    }
 
-  /* Estilos para los botones */
-  button {
-    margin: 0 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #070b0f;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    transition: background-color 0.3s ease-in-out;
-  }
+    .portada_image {
+      max-width: 90%;
+      height: auto;
+    }
 
-  /* Estilos para botones al pasar el mouse */
-  button:hover {
-    background-color: #000000;
-  }
+    .button_container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
 
-  /* Estilos para el contenedor de imágenes */
+    button {
+      margin: 0 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #070b0f;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    button:hover {
+      background-color: #000000;
+    }
+
   .image_container {
-    position: relative;
-    width: 600px; /* Ancho fijo para el contenedor de imágenes */
-    height: 600px; /* Altura fija para el contenedor de imágenes */
-    margin: 0 auto; /* Centrar horizontalmente */
-    margin-top: 10px; /* Espacio superior */
-  }
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  height: 800px; /* Fijar altura del contenedor */
+  margin: 20px auto;
+  background-color: #ffffff; /* Fondo blanco para el contenedor de imágenes */
+  border: 2px solid #070b0f;
+  border-radius: 16px;
+  box-shadow: 4 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  align-items: center; /* Centrar contenido verticalmente */
+  justify-content: center; /* Centrar contenido horizontalmente */
+}
 
-  /* Estilos para las imágenes */
-  .chart_image {
-    position: absolute; /* Posición absoluta para superponer imágenes */
-    top: 0;
-    left: 0;
-    width: 100%; /* Ancho al 100% del contenedor */
-    height: auto; /* Altura automática para mantener proporciones */
-    opacity: 0; /* Inicialmente ocultas */
-    transition: opacity 0.5s ease-in-out; /* Transición de opacidad */
-  }
 
-  /* Estilos para la imagen activa */
-  .chart_image.active {
-    opacity: 1; /* Mostrar la imagen activa */
-  }
+.chart_image {
+  position:absolute;
+  max-width: 100%;
+  height: auto;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.chart_image.active {
+      opacity: 1;
+}
 </style>
