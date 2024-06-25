@@ -32,9 +32,9 @@
 
 /* Array de miniaturas */
   let thumbnails = [
-    { src: "images/DebutF.png", url: "debut.html" },
+    { src: "images/debutF.png", url: "debut.html" },
     { src: "images/FearlessF.png", url: "fearless.html" },
-    { src: "images/SnF.png", url: "sn.html" },
+    { src: "images/snF.png", url: "sn.html" },
     { src: "images/RedF.png", url: "red.html" },
     { src: "images/1989F.png", url: "1989.html" },
     { src: "images/RepF.png", url: "rep.html" },
@@ -42,7 +42,7 @@
     { src: "images/FolkF.png", url: "folk.html" },
     { src: "images/EverF.png", url: "ever.html" },
     { src: "images/MidnF.png", url: "midn.html" },
-    { src: "images/TtpdF.png", url: "ttpd.html" }
+    { src: "images/ttpdF.png", url: "ttpd.html" }
   ];
 
   /* Función para cambiar el índice de la imagen activa */
