@@ -23,11 +23,26 @@
 
   /* Array de imágenes */
   let charts = [
-    "images/img1.png",
-    "images/img2.png",
-    "images/img3.png",
-    "images/img4.png",
-    "images/img5.png"
+    { src: "images/img1.png", title: "Canciones en el Hot 100" },
+    { src: "images/img2.png", title: "Récords Rotos" },
+    { src: "images/img3.png", title: "Puntaje en Metacritic" },
+    { src: "images/img4.png", title: "Hits #1" },
+    { src: "images/img5.png", title: "Premios Ganados" }
+  ];
+
+  /* Array de miniaturas */
+  let thumbnails = [
+    "images/DebutF.png",
+    "images/FearlessF.png",
+    "images/SnF.png",
+    "images/RedF.png",
+    "images/1989F.png",
+    "images/RepF.png",
+    "images/LoverF.png",
+    "images/FolkF.png",
+    "images/EverF.png",
+    "images/MidnF.png",
+    "images/TtpdF.png"
   ];
 
   /* Función para cambiar el índice de la imagen activa */
@@ -44,25 +59,33 @@
     <img src="images/portada.png" alt="Portada" class="portada_image" />
   </div>
 
+  <div class="thumbnails_container">
+    <!-- Imágenes en miniatura -->
+    {#each thumbnails as thumb, i}
+      <img src={thumb} alt="Thumbnail {i + 1}" class="thumbnail_image" />
+    {/each}
+  </div>
+
   <div class="button_container">
     <!-- Botones para cambiar las imágenes -->
     {#each charts as chart, i}
-      <button on:click={() => changeImage(i)}>Imagen {i + 1}</button>
+      <button on:click={() => changeImage(i)}>{chart.title}</button>
     {/each}
   </div>
 
   <div class="image_container">
     <!-- Iteración sobre el array de imágenes -->
     {#each charts as chart, i}
-      <img src={chart} alt="Chart {i + 1}" class="chart_image {index === i ? 'active' : ''}" />
+      <img src={chart.src} alt="{chart.title}" class="chart_image {index === i ? 'active' : ''}" />
     {/each}
   </div>
 </main>
+
 <style>
     .portada_container {
       text-align: center;
       margin-top: 20px;
-      margin-bottom: 60px;
+      margin-bottom: 20px;
     }
 
     .portada_image {
@@ -70,33 +93,47 @@
       height: auto;
     }
 
-    .button_container {
+    .thumbnails_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0;
+  }
+
+  .thumbnail_image {
+    flex: 1 0 9%; /* Aproximadamente 1/11 del ancho, ajusta si es necesario */
+    max-width: 100px;
+    height: auto;
+    margin: 5px;
+  }
+
+  .button_container {
       display: flex;
       justify-content: center;
-      margin-top: 20px;
-    }
+      margin-top: 100px;
+  }
 
-    button {
+  button {
       margin: 0 10px;
       padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
-      background-color: #070b0f;
+      background-color: #111622;
       color: #fff;
       border: none;
       border-radius: 4px;
       transition: background-color 0.3s ease-in-out;
-    }
+  }
 
-    button:hover {
+  button:hover {
       background-color: #000000;
-    }
+  }
 
   .image_container {
   position: relative;
   width: 100%;
   max-width: 1000px;
-  height: 800px; /* Fijar altura del contenedor */
+  height: 650px; /* Fijar altura del contenedor */
   margin: 20px auto;
   background-color: #ffffff; /* Fondo blanco para el contenedor de imágenes */
   border: 2px solid #070b0f;
@@ -111,7 +148,7 @@
 
 .chart_image {
   position:absolute;
-  max-width: 100%;
+  max-width: 90%;
   height: auto;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
@@ -121,3 +158,4 @@
       opacity: 1;
 }
 </style>
+
