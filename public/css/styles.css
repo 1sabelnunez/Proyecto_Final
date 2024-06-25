@@ -34,6 +34,21 @@ h1 {
   max-width: 90%;
   height: auto;
 }
+.thumbnails_container {
+  display: flex;
+  flex-wrap: nowrap; /* Evita que las miniaturas se desborden a la siguiente línea */
+  justify-content: space-between;
+  margin: 20px 0;
+  overflow-x: auto; /* Permite el desplazamiento horizontal si es necesario */
+}
+
+.thumbnail_image {
+  flex: 0 0 auto; /* Mantén las miniaturas en una sola fila */
+  max-width: 130px; /* Ajusta el ancho según tus necesidades */
+  height: auto;
+  margin: 0 5px; /* Ajusta el margen entre las miniaturas */
+}
+
 
 .button_container {
   display: flex;
