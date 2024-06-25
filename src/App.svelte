@@ -31,18 +31,18 @@
   ];
 
 /* Array de miniaturas */
-  let thumbnails = [
-    { src: "images/debutF.png", url: "debut.html" },
-    { src: "images/FearlessF.png", url: "fearless.html" },
-    { src: "images/snF.png", url: "sn.html" },
-    { src: "images/RedF.png", url: "red.html" },
-    { src: "images/1989F.png", url: "1989.html" },
-    { src: "images/RepF.png", url: "rep.html" },
-    { src: "images/LoverF.png", url: "lover.html" },
-    { src: "images/FolkF.png", url: "folk.html" },
-    { src: "images/EverF.png", url: "ever.html" },
-    { src: "images/MidnF.png", url: "midn.html" },
-    { src: "images/ttpdF.png", url: "ttpd.html" }
+let thumbnails = [
+    { src: "images/DebutF.png", preview: "images/debutPreview.png", url: "debut.html" },
+    { src: "images/FearlessF.png", preview: "images/FearlessPreview.png", url: "fearless.html" },
+    { src: "images/SnF.png", preview: "images/SnPreview.png", url: "sn.html" },
+    { src: "images/RedF.png", preview: "images/RedPreview.png", url: "red.html" },
+    { src: "images/1989F.png", preview: "images/1989Preview.png", url: "1989.html" },
+    { src: "images/RepF.png", preview: "images/RepPreview.png", url: "rep.html" },
+    { src: "images/LoverF.png", preview: "images/LoverPreview.png", url: "lover.html" },
+    { src: "images/FolkF.png", preview: "images/FolkPreview.png", url: "folk.html" },
+    { src: "images/EverF.png", preview: "images/EverPreview.png", url: "ever.html" },
+    { src: "images/MidnF.png", preview: "images/MidnPreview.png", url: "midn.html" },
+    { src: "images/TtpdF.png", preview: "images/TtpdPreview.png", url: "ttpd.html" }
   ];
 
   /* Función para cambiar el índice de la imagen activa */
@@ -56,6 +56,16 @@
     window.location.href = url;
   }
 
+  let previewImage = '';
+
+  function showPreview(previewSrc) {
+    previewImage = previewSrc;
+  }
+
+  function hidePreview() {
+    previewImage = '';
+  }
+
 </script>
 
 <main>
@@ -67,8 +77,21 @@
   <div class="thumbnails_container">
     <!-- Imágenes en miniatura -->
     {#each thumbnails as thumb, i}
-      <img src={thumb.src} alt="Thumbnail {i + 1}" class="thumbnail_image" on:click={() => redirectToPage(thumb.url)} />
+      <img 
+        src={thumb.src} 
+        alt="Thumbnail {i + 1}" 
+        class="thumbnail_image" 
+        on:click={() => redirectToPage(thumb.url)} 
+        on:mouseover={() => showPreview(thumb.preview)}
+        on:mouseout={() => hidePreview()}
+      />
     {/each}
+  </div>
+
+  <div class="preview_container">
+    {#if previewImage}
+      <img src={previewImage} alt="Vista previa" class="preview_image" />
+    {/if}
   </div>
 
   <div class="button_container">
@@ -110,9 +133,20 @@
   flex: 0 0 auto; /* Mantén las miniaturas en una sola fila */
   max-width: 130px; /* Ajusta el ancho según tus necesidades */
   height: auto;
-  margin: 0 5px; /* Ajusta el margen entre las miniaturas */
 }
+/*.thumbnails_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0;
+  }
 
+  .thumbnail_image {
+    flex: 1 0 9%; /* Aproximadamente 1/11 del ancho, ajusta si es necesario 
+    max-width: 130px;
+    height: auto;
+  }
+*/
   .button_container {
       display: flex;
       justify-content: center;
