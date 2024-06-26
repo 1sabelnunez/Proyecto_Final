@@ -41,7 +41,13 @@ h1 {
   margin: 20px 0;
   overflow-x: auto; /* Permite el desplazamiento horizontal si es necesario */
 }
-
+.thumbnail_wrapper {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease; /* Añadir transición para el efecto de escala */
+}
 .thumbnail_image {
   flex: 0 0 auto; /* Mantén las miniaturas en una sola fila */
   max-width: 130px; /* Ajusta el ancho según tus necesidades */
@@ -61,6 +67,40 @@ h1 {
   }
 */
 
+.thumbnail_wrapper:hover {
+  transform: scale(1.2); /* Aumentar el tamaño al pasar el mouse */
+}
+
+.preview_container {
+  position: absolute;
+  top: calc(100% + 10px); /* Posiciona la vista previa debajo de las miniaturas */
+  left: 50%; /* Centra horizontalmente la vista previa */
+  transform: translateX(-50%); /* Ajusta la posición horizontal */
+  z-index: 1000;
+  pointer-events: none; /* Evita que la vista previa bloquee eventos */
+  display: none; /* Inicialmente oculta la vista previa */
+}
+
+.preview_container img {
+  max-width: 200px; /* Ajusta el tamaño de la vista previa según tus necesidades */
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  pointer-events: none; /* Evita que la vista previa bloquee eventos */
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5); /* Inicialmente reduce el tamaño y la opacidad */
+}
+
+.thumbnail_wrapper:hover .preview_container {
+  display: block; /* Muestra la vista previa al pasar el mouse */
+}
+
+.thumbnail_wrapper:hover .preview_container img {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1); /* Cambia las propiedades de transformación según sea necesario */
+}
 
 .button_container {
   display: flex;
