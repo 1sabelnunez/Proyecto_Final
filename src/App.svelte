@@ -95,7 +95,9 @@ let thumbnails = [
       <img src={previewImage} alt="Vista previa" class="preview_image" />
     {/if}
   </div>
-
+  <div class="intro">
+    <img src="images/intro.png" alt="info random">
+  </div>
   <div class="button_container">
     <!-- Botones para cambiar las imágenes -->
     {#each charts as chart, i}
@@ -122,7 +124,7 @@ let thumbnails = [
       max-width: 100%;
       height: auto;
     }
-
+ 
     .thumbnails_container {
   display: flex;
   flex-wrap: nowrap; /* Evita que las miniaturas se desborden a la siguiente línea */
@@ -142,6 +144,22 @@ let thumbnails = [
   max-width: 130px; /* Ajusta el ancho según tus necesidades */
   height: auto;
 }
+.intro {
+    text-align: center; /* Centra el contenido horizontalmente */
+    margin-top: 20px; /* Espacio superior opcional */
+  }
+
+  h1 {
+    font-family: 'Times New Roman', Times, serif; /* Fuente específica para el título */
+    font-size: 24px; /* Tamaño del título */
+    margin-bottom: 10px; /* Espacio inferior del título */
+  }
+
+  img {
+    max-width: 60%; /* Ajusta el tamaño máximo de la imagen */
+    height: auto; /* Mantiene la proporción original de la imagen */
+    margin-top: 20px; /* Espacio superior opcional */
+  }
 /*.thumbnails_container {
     display: flex;
     flex-wrap: wrap;

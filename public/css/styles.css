@@ -92,7 +92,22 @@ h1 {
   opacity: 0;
   transform: translate(-50%, -50%) scale(0.5); /* Inicialmente reduce el tamaño y la opacidad */
 }
+.intro {
+  text-align: center; /* Centra el contenido horizontalmente */
+  margin-top: 20px; /* Espacio superior opcional */
+}
 
+h1 {
+  font-family: 'Times New Roman', Times, serif; /* Fuente específica para el título */
+  font-size: 24px; /* Tamaño del título */
+  margin-bottom: 10px; /* Espacio inferior del título */
+}
+
+img {
+  max-width: 60%; /* Ajusta el tamaño máximo de la imagen */
+  height: auto; /* Mantiene la proporción original de la imagen */
+  margin-top: 20px; /* Espacio superior opcional */
+}
 .thumbnail_wrapper:hover .preview_container {
   display: block; /* Muestra la vista previa al pasar el mouse */
 }
