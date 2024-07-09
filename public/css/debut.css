@@ -1,11 +1,11 @@
 body {
   background-color: #839C74;
   margin: 0;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .background-container {
-  position: relative; /* Asegura que el contenedor de fondo esté debajo de la imagen */
+  position: absolute; /* Asegura que el contenedor de fondo esté debajo de la imagen */
   z-index: -2;
 }
 
@@ -19,8 +19,39 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain; /* Hace que la imagen cubra toda la pantalla */
-  z-index: -1;
+  z-index: 1;
 }
 
+.titulo{
+  position: absolute; /* Posicionamiento absoluto */
+  top: 25%; /* Alinea la parte superior del título al centro verticalmente */
+  left: 300px; /* Ajusta la posición desde el borde izquierdo */
+  transform: translateY(-50%); /* Centra verticalmente el título */
+  width: 500px; /* Ancho de la imagen */
+}
+
+.foto1{
+  position: absolute; /* Posicionamiento absoluto */
+  top: 50%; /* Alinea la parte superior del título al centro verticalmente */
+  left: 860px; /* Ajusta la posición desde el borde izquierdo */
+  transform: translateY(-50%); /* Centra verticalmente el título */
+  width: 400px; /* Ancho de la imagen */
+}
+
+.texto1{
+  position: absolute; /* Posicionamiento absoluto */
+  top: 55%; /* Alinea la parte superior del título al centro verticalmente */
+  left: 300px; /* Ajusta la posición desde el borde izquierdo */
+  transform: translateY(-50%); /* Centra verticalmente el título */
+  width: 500px; /* Ancho de la imagen */
+}
+
+.foto2{
+  position: absolute; /* Posicionamiento absoluto */
+  top: 125%; /* Alinea la parte superior del título al centro verticalmente */
+  left: 300px; /* Ajusta la posición desde el borde izquierdo */
+  transform: translateY(-50%); /* Centra verticalmente el título */
+  width: 500px; /* Ancho de la imagen */
+}
 
   
