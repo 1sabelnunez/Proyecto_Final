@@ -72,7 +72,7 @@
           src={thumb.src} 
           alt="Thumbnail {i + 1}" 
           class="thumbnail_image" 
-          on:click={() => changeImage(i)}
+          on:click={() => redirectToPage(thumb.url)}
         />
       </div>
     {/each}
