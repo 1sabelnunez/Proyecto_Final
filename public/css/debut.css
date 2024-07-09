@@ -33,9 +33,9 @@ body {
 .foto1{
   position: absolute; /* Posicionamiento absoluto */
   top: 50%; /* Alinea la parte superior del título al centro verticalmente */
-  left: 860px; /* Ajusta la posición desde el borde izquierdo */
+  left: 850px; /* Ajusta la posición desde el borde izquierdo */
   transform: translateY(-50%); /* Centra verticalmente el título */
-  width: 400px; /* Ancho de la imagen */
+  width: 350px; /* Ancho de la imagen */
 }
 
 .texto1{
