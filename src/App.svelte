@@ -1,7 +1,17 @@
 <script>
   /* Importaciones de módulos */
-  import { onMount } from "svelte";
   import * as d3 from "d3";
+  import Scroller from "@sveltejs/svelte-scroller";
+  import { onMount } from "svelte";
+  import DebugScroller from "./components/DebugScroller.svelte";
+
+  let visible = false;
+
+  onMount(() => {
+    setTimeout(() => {
+      visible = true;
+    }, 5000); // 3000 ms = 3 segundos
+  });
 
   /* Variables para el scroller1 */
   let count;
@@ -23,26 +33,26 @@
 
   /* Array de imágenes */
   let charts = [
-    { src: "images/img1.png", title: "Canciones en el Hot 100" },
-    { src: "images/img2.png", title: "Récords Rotos" },
-    { src: "images/img3.png", title: "Puntaje en Metacritic" },
-    { src: "images/img4.png", title: "Hits #1" },
-    { src: "images/img5.png", title: "Premios Ganados" }
+    "images/img1.png",
+    "images/img2.png",
+    "images/img3.png",
+    "images/img4.png",
+    "images/img5.png"
   ];
 
   /* Array de miniaturas */
   let thumbnails = [
     { src: "images/debutPreview.png", url: "debut.html" },
     { src: "images/FearlessPreview.png", url: "fearless.html" },
-    { src:  "images/SnPreview.png", url: "sn.html" },
-    { src:  "images/RedPreview.png", url: "red.html" },
+    { src: "images/SnPreview.png", url: "sn.html" },
+    { src: "images/RedPreview.png", url: "red.html" },
     { src: "images/1989Preview.png", url: "1989.html" },
-    { src:  "images/RepPreview.png", url: "rep.html" },
-    { src:  "images/LoverPreview.png", url: "lover.html" },
-    { src:  "images/FolkPreview.png", url: "folk.html" },
-    { src:  "images/EverPreview.png", url: "ever.html" },
-    { src:  "images/MidnPreview.png", url: "midn.html" },
-    { src:  "images/TtpdPreview.png", url: "ttpd.html" }
+    { src: "images/RepPreview.png", url: "rep.html" },
+    { src: "images/LoverPreview.png", url: "lover.html" },
+    { src: "images/FolkPreview.png", url: "folk.html" },
+    { src: "images/EverPreview.png", url: "ever.html" },
+    { src: "images/MidnPreview.png", url: "midn.html" },
+    { src: "images/TtpdPreview.png", url: "ttpd.html" }
   ];
 
   /* Función para cambiar el índice de la imagen activa */
@@ -55,7 +65,6 @@
   function redirectToPage(url) {
     window.location.href = url;
   }
-
 </script>
 
 <main>
@@ -82,17 +91,55 @@
     <img src="images/intro.png" alt="info random">
   </div>
 
-  <div class="button_container">
-    <!-- Botones para cambiar las imágenes -->
-    {#each charts as chart, i}
-      <button on:click={() => changeImage(i)}>{chart.title}</button>
-    {/each}
-  </div>
+  <!-- Primer scroller top comics -->
+  <Scroller
+    top={top}
+    threshold={threshold}
+    bottom={bottom}
+    bind:count={count}
+    bind:index={index}
+    bind:offset={offset}
+    bind:progress={progress}
+  >
+    <div slot="background" class="image_container">
+      <img src={charts[index]} alt="chart {index}" class="charts"/>
+    </div>
+    <div slot="foreground" class="foreground_container">
+      <section class="step_foreground">
+        <div class="epi_foreground">
+          <p>Los tres cómics más vendidos de Batman</p>
+        </div>
+      </section>
+      <section class="step_foreground">
+        <div class="epi_foreground">
+          <p>
+            El Caballero de la Noche Regresa una de las novelas gráficas más vendidas de todos los tiempos. Revolucionó a Batman 
+            como un personaje oscuro y complejo, diferente al Batman más ligero de décadas anteriores. 
+          </p>
+        </div>
+      </section>
+      <section class="step_foreground">
+        <div class="epi_foreground">
+          <p>
+            La Broma Asesina es una novela gráfica famosa por su profunda exploración del Guasón y su relación con Batman.
+          </p>
+        </div>
+      </section>
+      <section class="step_foreground">
+        <div class="epi_foreground">
+          <p>
+            La Larga Halloween es aclamada por su narrativa compleja y su exploración de los primeros años de Batman 
+            como detective y aliado de Harvey Dent y Jim Gordon.
+          </p>
+        </div>
+      </section>
+    </div>
+  </Scroller>
 
   <div class="image_container">
     <!-- Iteración sobre el array de imágenes -->
     {#each charts as chart, i}
-      <img src={chart.src} alt="{chart.title}" class="chart_image {index === i ? 'active' : ''}" />
+      <img src={chart} alt="chart {i}" class="chart_image {index === i ? 'active' : ''}" />
     {/each}
   </div>
 </main>
@@ -111,75 +158,75 @@
 
   .thumbnails_container {
     display: flex;
-    flex-wrap: wrap; /* Permite que las miniaturas se ajusten a la siguiente línea si es necesario */
+    flex-wrap: wrap;
     justify-content: space-between;
     margin: 20px 0;
   }
 
   .thumbnail_wrapper {
-    flex: 1 0 9%; /* Aproximadamente 1/11 del ancho, ajusta si es necesario */
+    flex: 1 0 9%;
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    transition: transform 0.3s ease; /* Añadir transición para el efecto de escala */
-    width: 115px; /* Ajusta el ancho de las miniaturas */
-    height: 535px; /* Ajusta la altura de las miniaturas */
-    margin: 0; /* Elimina los márgenes */
-    padding: 0; /* Elimina el relleno */
+    transition: transform 0.3s ease;
+    width: 115px;
+    height: 535px;
+    margin: 0;
+    padding: 0;
   }
 
   .thumbnail_image {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Recorta la imagen para que se ajuste al contenedor */
+    object-fit: cover;
   }
 
   .thumbnail_wrapper:hover {
-    transform: scale(1.1); /* Aumentar el tamaño al pasar el mouse */
+    transform: scale(1.1);
   }
 
-  .button_container {
+  .foreground_container {
+    pointer-events: none;
+  }
+
+  .step_foreground {
     display: flex;
     justify-content: center;
-    margin-top: 80px;
+    align-items: center;
+    height: 100vh;
+    color: white;
+    padding: 1em;
+    margin: 0 0 2em 0;
   }
 
-  button {
-    margin: 0 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #111622;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    transition: background-color 0.3s ease-in-out;
+  .epi_foreground {
+    padding: 20px;
+    width: 400px;
+    background-color: rgba(255, 255, 255, 0.95);
+    text-align: center;
   }
 
-  button:hover {
-    background-color: #000000;
+  .epi_foreground p {
+    color: #000;
   }
 
   .image_container {
-    position: relative;
-    width: 100%;
-    max-width: 1000px;
-    height: 650px; /* Fijar altura del contenedor */
-    margin: 20px auto;
-    background-color: #ffffff; /* Fondo blanco para el contenedor de imágenes */
-    border: 2px solid #070b0f;
-    border-radius: 16px;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
     display: flex;
-    align-items: center; /* Centrar contenido verticalmente */
-    justify-content: center; /* Centrar contenido horizontalmente */
+    justify-content: center;
+    align-items: center;
+    height: 95vh; /* Aumentar la altura */
+  }
+
+  .image_container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Asegura que la imagen se ajuste bien al contenedor */
   }
 
   .chart_image {
     position: absolute;
-    max-width: 90%;
-    height: auto;
+    max-width: 100%;
+    max-height: 100%;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
   }
