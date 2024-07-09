@@ -150,8 +150,6 @@ max-width: 1000px;
 height: 800px; /* Fijar altura del contenedor */
 margin: 20px auto;
 background-color: #ffffff; /* Fondo blanco para el contenedor de imágenes */
-border: 2px solid #070b0f;
-border-radius: 16px;
 box-shadow: 4 4px 8px rgba(0, 0, 0, 0.1);
 overflow: hidden;
 display: flex;
