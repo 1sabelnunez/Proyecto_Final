@@ -108,6 +108,7 @@
 </main>
 
 <style>
+
   .portada_container {
     text-align: center;
     margin-top: 20px;
@@ -172,6 +173,7 @@
   }
 
   .epi_foreground p {
+   
     color: #fdf9f9;
   }
 
