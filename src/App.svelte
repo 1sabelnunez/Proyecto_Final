@@ -220,17 +220,7 @@
     </div>
   </Scroller>
 
-  <div class="additional-containers2">
-    <div class="square-container2">
-      <p>Dato curioso: su tour mundial The Eras Tour fue nombrada la gira más exitosa de todos los tiempos, con la mayor recaudación de la historia, más de 1 billón de dólares.</p>
-    </div>
-    <div class="square-container2">
-      <p>Además, el estreno de la película de la gira - “Taylor Swift: The Eras Tour” - se convirtió en la película del género concierto más taquillera y recaudadora en la historia, con más de 261 millones de dólares.</p>
-    </div>
-  </div>
-  <div class="dynamic-typing-container">
-    <h2>{dynamicText}</h2>
-  </div>
+
 
   <div id="eras-section" class="thumbnails_container">
     <!-- Imágenes en miniatura -->
