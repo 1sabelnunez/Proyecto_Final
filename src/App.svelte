@@ -68,7 +68,7 @@
   }
 
   let dynamicText = "";
-  const dynamicTextContent = "¡Clickeá sobre cualquier era para más información!";
+  const dynamicTextContent = "Clickeá sobre cualquier era para más información";
   let dynamicTextIndex = 0;
 
   function typeDynamicText() {
@@ -78,6 +78,10 @@
       setTimeout(typeDynamicText, typingDelay);
     }
   }
+
+  let dynamicText2 = "";
+  const dynamicTextContent2 = "Scrolleá para conocer más datos sobre Taylor";
+  let dynamicTextIndex2 = 0;
 
   /* Variables y funciones para el texto dinámico de la introducción */
   const introTypedText = "Descubrí el extraordinario viaje musical de Taylor Swift a través de cada una de sus eras. En cada álbum marca una evolución en su arte, moldeando una sólida carrera y una conexión más profunda con sus fans, aumentando su impacto en la música contemporánea cada vez más.";
@@ -152,6 +156,7 @@
       chartsSection.scrollIntoView({ behavior: 'smooth' });
     }
   }
+
 </script>
 
 
@@ -185,7 +190,9 @@
     </div>
   </div>
   
-
+  <div class="dynamic-typing-container">
+    <h2>{dynamicTextContent2}</h2>
+  </div>
 
   <!-- Dentro del componente Scroller en tu archivo .svelte -->
    <!-- Dentro del componente Scroller en tu archivo .svelte -->
@@ -222,6 +229,11 @@
 
 
 
+
+  <div class="dynamic-typing-container">
+    <h2>{dynamicText}</h2>
+  </div>
+
   <div id="eras-section" class="thumbnails_container">
     <!-- Imágenes en miniatura -->
     {#each thumbnails as thumb, i}
@@ -252,7 +264,7 @@
   .button-container {
     display: flex;
     justify-content: center; /* Ajusta el espaciado entre los botones */
-    margin-top: 20px;
+    margin-top: 8%;
     margin-bottom: 20px;
   }
 
