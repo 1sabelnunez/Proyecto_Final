@@ -41,17 +41,17 @@
 
   /* Array de miniaturas */
   let thumbnails = [
-    { src: "images/debutPreview.png", url: "debut.html" },
-    { src: "images/FearlessPreview.png", url: "fearless.html" },
-    { src: "images/SnPreview.png", url: "sn.html" },
-    { src: "images/RedPreview.png", url: "red.html" },
-    { src: "images/1989Preview.png", url: "1989.html" },
-    { src: "images/RepPreview.png", url: "rep.html" },
-    { src: "images/LoverPreview.png", url: "lover.html" },
-    { src: "images/FolkPreview.png", url: "folk.html" },
-    { src: "images/EverPreview.png", url: "ever.html" },
-    { src: "images/MidnPreview.png", url: "midn.html" },
-    { src: "images/TtpdPreview.png", url: "ttpd.html" }
+    { src: "images/debutPreview.png", url: "src/debut.html" },
+    { src: "images/FearlessPreview.png", url: "src/fearless.html" },
+    { src: "images/SnPreview.png", url: "src/sn.html" },
+    { src: "images/RedPreview.png", url: "src/red.html" },
+    { src: "images/1989Preview.png", url: "src/1989.html" },
+    { src: "images/RepPreview.png", url: "src/rep.html" },
+    { src: "images/LoverPreview.png", url: "src/lover.html" },
+    { src: "images/FolkPreview.png", url: "src/folk.html" },
+    { src: "images/EverPreview.png", url: "src/ever.html" },
+    { src: "images/MidnPreview.png", url: "src/midn.html" },
+    { src: "images/TtpdPreview.png", url: "src/ttpd.html" }
   ];
 
   /* Variables para el texto dinámico */
