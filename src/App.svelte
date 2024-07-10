@@ -1,5 +1,7 @@
 <script>
   /* Importaciones de módulos */
+  import { fade } from 'svelte/transition'; // Importa la transición de desvanecimiento
+  import { fly } from 'svelte/transition';
   import * as d3 from "d3";
   import Scroller from "@sveltejs/svelte-scroller";
   import { onMount } from "svelte";
@@ -23,11 +25,11 @@
 
   /* Array de gráficos con títulos */
   let charts = [
-    { src: "images/img1.png", title: "Canciones en el Hot 100", text: "Todas las canciones (31) de la versión titulada “The Anthology” del álbum entraron en el Billboard Hot 100, ocupando los 14 primeros puestos del mismo simultáneamente. Así se convirtió en la primera artista en la historia en alcanzar este logro." },
-    { src: "images/img2.png", title: "Récords Rotos", text: "Texto adicional para Récords Rotos" },
-    { src: "images/img3.png", title: "Puntaje en Metacritic", text: "Texto adicional para Puntaje en Metacritic" },
-    { src: "images/img4.png", title: "Hits #1", text: "Texto adicional para Hits #1" },
-    { src: "images/img5.png", title: "Premios Ganados", text: "Texto adicional para Premios Ganados" }
+    { src: "images/img1.png", title: "Canciones en el Hot 100", text: "Desde que Taylor comenzó su viaje de re-grabaciones de sus discos, la artista logró conquistar nuevo público al re-lanzar y promocionar sus primeros álbumes, alcanzando nuevos picos de popularidad y metiendo cada vez más canciones en el Hot 100." },
+    { src: "images/img2.png", title: "Récords Rotos", text: "Sus dos álbumes no re-grabados más recientes, Midnights y The Tortured Poets Department, lograron conquistar a los “swifties” y a la prensa.  Con dos sonidos completamente diferentes, ambos se destacaron rompiendo récords establecidos por ella misma en el pasado, u otros que jamás nadie había alcanzado." },
+    { src: "images/img3.png", title: "Puntaje en Metacritic", text: "Tanto la crítica como los fans recibieron de forma muy positiva a Red TV, convirténdolo en su álbum mejor puntuado por Metacritic, con 91 puntos. Red, en cambio, empata con Speak Now por el 9° puesto, con 77 puntos." },
+    { src: "images/img4.png", title: "Hits #1", text: "Es notorio que con 1989 la carrera de Taylor alcanzó otro nivel, estableciéndola como una de las popstars con mayor renombre de la industria desde ese entonces." },
+    { src: "images/img5.png", title: "Premios Ganados", text: "Nuevamente, tanto Midnights como TTPD le dieron un nuevo giro a la carrera de Swift, que no podría estar un mayor auge que el actual. A pesar de que Midnights es el álbum con más premios ganados ya que TTPD salió hace muy poco, está claro que se llevará unos cuántos." }
   ];
   let textContainerColors = [
     "#8d8477a9", // TTPD
@@ -54,19 +56,19 @@
 
   /* Variables para el texto dinámico */
   let cursorVisible = true;
-  const typingDelay = 100;
+  const typingDelay = 50;
   let charIndex = 0;
 
   function type() {
     if (charIndex < text.length) {
       typedText += text.charAt(charIndex);
       charIndex++;
-      setTimeout(type, typingDelay);
+      setTimeout(type, typingDelay);  
     }
   }
 
   let dynamicText = "";
-  const dynamicTextContent = "Ahora que conoces sus logros, conocela a ella";
+  const dynamicTextContent = "¡Clickeá sobre cualquier era para más información!";
   let dynamicTextIndex = 0;
 
   function typeDynamicText() {
@@ -78,17 +80,10 @@
   }
 
   /* Variables y funciones para el texto dinámico de la introducción */
-  let introTypedText = "";
-  const introText = "Descubre el extraordinario viaje musical de Taylor Swift a través de cada una de sus eras. Desde sus humildes comienzos en el country hasta su reinado como ícono del pop global, cada álbum marca una evolución en su arte y una conexión más profunda con sus fans. Explora cómo cada era ha moldeado su carrera y su impacto en la música contemporánea.";
+  const introTypedText = "Descubrí el extraordinario viaje musical de Taylor Swift a través de cada una de sus eras. En cada álbum marca una evolución en su arte, moldeando una sólida carrera y una conexión más profunda con sus fans, aumentando su impacto en la música contemporánea cada vez más.";
+  const introTypedText2= "Además de contar con más de 200 millones de discos vendidos en todo el mundo, siendo la tercer artista más escuchada en Spotify con más de 100 millones de oyentes anuales, más de 250 millones de seguidores en Instagram y más de 90 millones en twitter, un patrimonio neto de 1,3 billones de dólares y más de 260 canciones en el Billboard Hot 100, estos son algunos de los mejores hitos de la carrera de Taylor Swift"
   let introCharIndex = 0;
 
-  function typeIntroText() {
-    if (introCharIndex < introText.length) {
-      introTypedText += introText.charAt(introCharIndex);
-      introCharIndex++;
-      setTimeout(typeIntroText, typingDelay);
-    }
-  }
 
   onMount(() => {
     const observer = new IntersectionObserver(
@@ -177,25 +172,35 @@
       <button on:click={scrollToCharts}>Ver Charts</button>
     </div>
   </div>
+  <div class= "intro-container">
     <!-- Introducción a Taylor Swift y sus eras -->
     <div class="intro">
       <h2>{introTypedText}</h2>
     </div>
+  </div>
+      <!-- Contenedor para los cuadrados adicionales -->
+  <div class="mas-container">
+    <div class="mastexto">
+      <h2>{introTypedText2}</h2>
+    </div>
+  </div>
   
 
 
   <!-- Dentro del componente Scroller en tu archivo .svelte -->
-  <Scroller
-    top={top}
-    threshold={threshold}
-    bottom={bottom}
-    bind:count={count}
-    bind:index={index}
-    bind:offset={offset}
-    bind:progress={progress}
-  >
+   <!-- Dentro del componente Scroller en tu archivo .svelte -->
+   <Scroller
+   top={top}
+   threshold={threshold}
+   bottom={bottom}
+   bind:count={count}
+   bind:index={index}
+   bind:offset={offset}
+   bind:progress={progress}
+ >
+
     <div slot="background" class="image_container">
-      <img src="{charts[index].src}" alt="chart {index}" class="charts" />
+      <img src={charts[index].src} alt="chart {index}" class="charts" />
     </div>
     <div slot="foreground" class="foreground_container">
       {#each charts as chart, i}
@@ -215,11 +220,6 @@
     </div>
   </Scroller>
 
-  <!-- Texto dinámico de la introducción -->
-  <div class="dynamic-intro-container">
-    <h2>{typeDynamicText}</h2>
-  </div>
-
   <div class="dynamic-typing-container">
     <h2>{dynamicText}</h2>
   </div>
@@ -237,6 +237,14 @@
       </div>
     {/each}
   </div>
+  <div class="additional-containers2">
+    <div class="square-container2">
+      <p>Dato curioso: su tour mundial The Eras Tour fue nombrada la gira más exitosa de todos los tiempos, con la mayor recaudación de la historia, más de 1 billón de dólares.</p>
+    </div>
+    <div class="square-container2">
+      <p>Además, el estreno de la película de la gira - “Taylor Swift: The Eras Tour” - se convirtió en la película del género concierto más taquillera y recaudadora en la historia, con más de 261 millones de dólares.</p>
+    </div>
+  </div>
 </main>
 
 <style>
@@ -253,7 +261,7 @@
 
   .button-container {
     display: flex;
-    justify-content: space-around; /* Ajusta el espaciado entre los botones */
+    justify-content: center; /* Ajusta el espaciado entre los botones */
     margin-top: 20px;
     margin-bottom: 20px;
   }
@@ -280,18 +288,36 @@
   .ver-charts-button button:hover {
     background-color: #031830;
   }
-  .typing-container {
+  .intro-container {
+    width: 50%;
+    justify-content: center;
     text-align: center;
-    font-family: 'Shadows Into Light Two', cursive;
-    color: #fcfcfc;
-    margin-bottom: 20px;
+    margin-left: 5%;
+  }
+  .intro{
+    color: #ffffff;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-size: medium;
+    text-align: center;
+
   }
 
-  .typed-text {
-    font-size: 24px;
-    white-space: nowrap;
-    overflow: hidden;
+  .mas-container {
+    width: 50%;
+    justify-content: center;
+    text-align: center;
   }
+ .mastexto{
+    color: #ffffff;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-size: medium;
+    text-align: center;
+ }
+
 
   .hidden {
     opacity: 0;
@@ -415,11 +441,45 @@
     max-width: 50%;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #FFF8E1;
+    transition: opacity 0.5s ease; /* Animación de fade */
+  }
+  .image_container.show {
+    opacity: 1;
   }
 
   .image_container img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
+  }
+  .additional-containers2 {
+    display: flex;
+    justify-content: center;
+    gap: 3%;
+    margin-top: 10%;
+  }
+
+  .square-container2 {
+    width: 30%;
+    height: 200px;
+    background-color: #192031;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Shadows Into Light Two', cursive;
+  }
+  .typing-container {
+    text-align: center;
+    font-family: 'Shadows Into Light Two', cursive;
+    color: #fcfcfc;
+    margin-bottom: 20px;
+  }
+
+  .typed-text {
+    font-size: medium;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
   }
 </style>
