@@ -3,7 +3,6 @@
   import * as d3 from "d3";
   import Scroller from "@sveltejs/svelte-scroller";
   import { onMount } from "svelte";
-  import DebugScroller from "./components/DebugScroller.svelte";
 
   let visible = false;
 
@@ -30,6 +29,13 @@
     { src: "images/img4.png", title: "Hits #1", text: "Texto adicional para Hits #1" },
     { src: "images/img5.png", title: "Premios Ganados", text: "Texto adicional para Premios Ganados" }
   ];
+  let textContainerColors = [
+    "#8d8477a9", // TTPD
+    "#8d8477a9", // TTPD
+    "#702431", // RED
+    "#678794", // 1989
+    "#242E47"  // Midni
+  ];
 
   /* Array de miniaturas */
   let thumbnails = [
@@ -46,21 +52,8 @@
     { src: "images/TtpdPreview.png", url: "ttpd.html" }
   ];
 
-  /* Función para cambiar el índice de la imagen activa */
-  function changeImage(newIndex) {
-    index = newIndex;
-    console.log("Nuevo índice:", index);
-  }
-
-  /* Función para redirigir al usuario */
-  function redirectToPage(url) {
-    window.location.href = url;
-  }
-
-  // Variables para el texto dinámico
-  let typedText = "";
+  /* Variables para el texto dinámico */
   let cursorVisible = true;
-  const text = "A continuación vamos a hacer un viaje a través de las eras de Taylor Swift <3";
   const typingDelay = 100;
   let charIndex = 0;
 
@@ -81,6 +74,19 @@
       dynamicText += dynamicTextContent.charAt(dynamicTextIndex);
       dynamicTextIndex++;
       setTimeout(typeDynamicText, typingDelay);
+    }
+  }
+
+  /* Variables y funciones para el texto dinámico de la introducción */
+  let introTypedText = "";
+  const introText = "Descubre el extraordinario viaje musical de Taylor Swift a través de cada una de sus eras. Desde sus humildes comienzos en el country hasta su reinado como ícono del pop global, cada álbum marca una evolución en su arte y una conexión más profunda con sus fans. Explora cómo cada era ha moldeado su carrera y su impacto en la música contemporánea.";
+  let introCharIndex = 0;
+
+  function typeIntroText() {
+    if (introCharIndex < introText.length) {
+      introTypedText += introText.charAt(introCharIndex);
+      introCharIndex++;
+      setTimeout(typeIntroText, typingDelay);
     }
   }
 
@@ -113,20 +119,70 @@
       { threshold: 0.1 }
     );
     dynamicObserver.observe(document.querySelector(".dynamic-typing-container"));
+
+    const introObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setTimeout(typeIntroText, typingDelay * 2); // Ajustar el retraso para el texto de introducción
+            introObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    introObserver.observe(document.querySelector(".intro"));
   });
+
+  /* Función para cambiar el índice de la imagen activa */
+  function changeImage(newIndex) {
+    index = newIndex;
+    console.log("Nuevo índice:", index);
+  }
+
+  /* Función para redirigir al usuario */
+  function redirectToPage(url) {
+    window.location.href = url;
+  }
+
+  function scrollToEras() {
+    const erasSection = document.getElementById('eras-section');
+    if (erasSection) {
+      erasSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+  function scrollToCharts() {
+    const chartsSection = document.getElementById('charts-section');
+    if (chartsSection) {
+      chartsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 </script>
+
 
 <main>
   <div class="portada_container">
     <!-- Imagen de portada -->
     <img src="images/portada.png" alt="Portada" class="portada_image" />
   </div>
-
-  <!-- Texto dinámico -->
-  <div class="typing-container">
-    <span class="typed-text">{typedText}</span>
-    <span class:hidden={!cursorVisible}>|</span>
+  <!-- Contenedor para los botones -->
+  <div class="button-container">
+    <!-- Botón "Ver Eras" -->
+    <div class="ver-eras-button">
+      <button on:click={scrollToEras}>Ver Eras</button>
+    </div>
+    
+    <!-- Botón "Ver Charts" -->
+    <div class="ver-charts-button">
+      <button on:click={scrollToCharts}>Ver Charts</button>
+    </div>
   </div>
+    <!-- Introducción a Taylor Swift y sus eras -->
+    <div class="intro">
+      <h2>{introTypedText}</h2>
+    </div>
+  
+
 
   <!-- Dentro del componente Scroller en tu archivo .svelte -->
   <Scroller
@@ -144,10 +200,10 @@
     <div slot="foreground" class="foreground_container">
       {#each charts as chart, i}
         <section class="step_foreground">
-          <div class="title_container">
+          <div class="title_container {`background-color-${i}`}">
             <p>{chart.title}</p>
           </div>
-          <div class="text_container">
+          <div class="text_container {`background-color-${i}`}">
             <div class="sticky_note">
               {#if visible && index === i}
                 <p>{chart.text}</p>
@@ -159,11 +215,16 @@
     </div>
   </Scroller>
 
+  <!-- Texto dinámico de la introducción -->
+  <div class="dynamic-intro-container">
+    <h2>{typeDynamicText}</h2>
+  </div>
+
   <div class="dynamic-typing-container">
     <h2>{dynamicText}</h2>
   </div>
 
-  <div class="thumbnails_container">
+  <div id="eras-section" class="thumbnails_container">
     <!-- Imágenes en miniatura -->
     {#each thumbnails as thumb, i}
       <div class="thumbnail_wrapper">
@@ -175,10 +236,6 @@
         />
       </div>
     {/each}
-  </div>
-
-  <div class="intro">
-    <img src="images/intro.png" alt="info random">
   </div>
 </main>
 
@@ -194,6 +251,35 @@
     height: auto;
   }
 
+  .button-container {
+    display: flex;
+    justify-content: space-around; /* Ajusta el espaciado entre los botones */
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .ver-eras-button,
+  .ver-charts-button {
+    text-align: center;
+  }
+
+  .ver-eras-button button,
+  .ver-charts-button button {
+    padding: 10px 20px;
+    font-family: "Shadows Into Light Two", cursive;
+    font-size: 110%;
+    background-color: #020d1a;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+
+  .ver-eras-button button:hover,
+  .ver-charts-button button:hover {
+    background-color: #031830;
+  }
   .typing-container {
     text-align: center;
     font-family: 'Shadows Into Light Two', cursive;
@@ -264,53 +350,60 @@
     margin: 0 0 2em 0;
   }
 
-  .title_container {
-    justify-content: center;
-    align-items: center; /* Centra el sticky note verticalmente */
-    display: flex;
-    flex-direction: column; /* Alinear elementos verticalmente */
-    align-items: left; /* Alinear elementos a la izquierda */
-    width: 30%; /* Ancho del contenedor ajustable según necesidad */
-    height: 90%;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0);
-    text-align: center; /* Alinear texto al centro dentro de los contenedores */
-    margin-left: -300px;
-    box-sizing: border-box; /* Incluye padding en las dimensiones totales */
+
+
+   /* Define clases para cada color */
+   .background-color-0 {
+    background-color: #8d8477a9; /* Color para el gráfico 0 */
+  }
+  .background-color-1 {
+    background-color: #8d8477a9; /* Color para el gráfico 1 */
+  }
+  .background-color-2 {
+    background-color: #70243198; /* Color para el gráfico 2 */
+  }
+  .background-color-3 {
+    background-color: #67879496; /* Color para el gráfico 3 */
+  }
+  .background-color-4 {
+    background-color: #12172493; /* Color para el gráfico 4 */
   }
 
+  /* Otros estilos restantes */
   .text_container {
+    margin-top: 30%;
     display: flex;
-    justify-content: center; /* Centra el sticky note horizontalmente */
-    align-items: center; /* Centra el sticky note verticalmente */
-    width: 30%; /* Ancho del contenedor ajustable según necesidad */
-    height: 90%;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 30%;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0);
-    text-align: center; /* Alinear texto al centro dentro de los contenedores */
-    background-image: url('images/stickynote1.png'); /* Ruta de tu imagen de fondo */
-    background-size: contain; /* Ajusta el tamaño de la imagen para que no se recorte */
-    background-position: center; /* Posición centrada de la imagen */
-    background-repeat: no-repeat; /* Evita que la imagen se repita */
-    margin-right: -20px;
-    box-sizing: border-box; /* Incluye padding en las dimensiones totales */
+    box-sizing: border-box;
   }
 
   .text_container p {
-    color: #000; /* Ajusta el color del texto para mejor legibilidad */
-    margin: 0; /* Eliminar márgenes por defecto */
-    width: 75%; /* Asegura que el texto no se desborde */
+    color: #ffffff;
+    margin: 0;
+    width: 100%;
     height: 100%;
-    font-size: small;
-    margin-left: 5px;
+    font-size: medium;
+    text-align: center;
   }
-  .title_container p{
-    color:#000;
-    margin: 0; /* Eliminar márgenes por defecto */
-    width: 75%; /* Asegura que el texto no se desborde */
-    height: 0%;
-    font-size: large;
-    
+  .title_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 30%;
+    margin-left: -25%;
+    text-align: center;
+  }
+  .title_container p {
+    color: #ffffff;
+    margin: 0;
+    width: 75%;
+    font-size: xx-large;
+    text-align: center;
   }
 
   .image_container {
@@ -321,9 +414,7 @@
     padding: 20px;
     max-width: 50%;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
-    background-image: url('images/paper.png'); /* Ruta de tu imagen de fondo */
-    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir el contenedor */
-    background-position: center; /* Posición centrada de la imagen */
+    background-color: #FFF8E1;
   }
 
   .image_container img {

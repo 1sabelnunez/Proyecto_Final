@@ -23,6 +23,7 @@ body {
   min-height: 100vh;
   background-color: #242e47;
   color: #ffffff;
+  
 }
 
 h1 {
@@ -77,27 +78,7 @@ h1 {
   transform: scale(1.2); /* Aumentar el tamaño al pasar el mouse */
 }
 
-.preview_container {
-  position: absolute;
-  top: calc(100% + 10px); /* Posiciona la vista previa debajo de las miniaturas */
-  left: 50%; /* Centra horizontalmente la vista previa */
-  transform: translateX(-50%); /* Ajusta la posición horizontal */
-  z-index: 1000;
-  pointer-events: none; /* Evita que la vista previa bloquee eventos */
-  display: none; /* Inicialmente oculta la vista previa */
-}
 
-.preview_container img {
-  max-width: 200px; /* Ajusta el tamaño de la vista previa según tus necesidades */
-  height: auto;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  pointer-events: none; /* Evita que la vista previa bloquee eventos */
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0.5); /* Inicialmente reduce el tamaño y la opacidad */
-}
 .intro {
   text-align: center; /* Centra el contenido horizontalmente */
   margin-top: 20px; /* Espacio superior opcional */
