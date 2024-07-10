@@ -199,7 +199,7 @@
    bind:progress={progress}
  >
 
-    <div slot="background" class="image_container">
+    <div  id= "charts-section" slot="background" class="image_container">
       <img src={charts[index].src} alt="chart {index}" class="charts" />
     </div>
     <div slot="foreground" class="foreground_container">
@@ -220,6 +220,14 @@
     </div>
   </Scroller>
 
+  <div class="additional-containers2">
+    <div class="square-container2">
+      <p>Dato curioso: su tour mundial The Eras Tour fue nombrada la gira más exitosa de todos los tiempos, con la mayor recaudación de la historia, más de 1 billón de dólares.</p>
+    </div>
+    <div class="square-container2">
+      <p>Además, el estreno de la película de la gira - “Taylor Swift: The Eras Tour” - se convirtió en la película del género concierto más taquillera y recaudadora en la historia, con más de 261 millones de dólares.</p>
+    </div>
+  </div>
   <div class="dynamic-typing-container">
     <h2>{dynamicText}</h2>
   </div>
@@ -236,14 +244,6 @@
         />
       </div>
     {/each}
-  </div>
-  <div class="additional-containers2">
-    <div class="square-container2">
-      <p>Dato curioso: su tour mundial The Eras Tour fue nombrada la gira más exitosa de todos los tiempos, con la mayor recaudación de la historia, más de 1 billón de dólares.</p>
-    </div>
-    <div class="square-container2">
-      <p>Además, el estreno de la película de la gira - “Taylor Swift: The Eras Tour” - se convirtió en la película del género concierto más taquillera y recaudadora en la historia, con más de 261 millones de dólares.</p>
-    </div>
   </div>
 </main>
 
@@ -293,6 +293,7 @@
     justify-content: center;
     text-align: center;
     margin-left: 5%;
+    margin-top: 5%;
   }
   .intro{
     color: #ffffff;
@@ -308,6 +309,8 @@
     width: 50%;
     justify-content: center;
     text-align: center;
+    margin-left: 45%;
+    margin-bottom: 5%;
   }
  .mastexto{
     color: #ffffff;
@@ -457,29 +460,18 @@
     justify-content: center;
     gap: 3%;
     margin-top: 10%;
+    margin-bottom: 10%;
   }
 
   .square-container2 {
     width: 30%;
     height: 200px;
+    margin-left: 5%;
     background-color: #192031;
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-family: 'Shadows Into Light Two', cursive;
-  }
-  .typing-container {
-    text-align: center;
-    font-family: 'Shadows Into Light Two', cursive;
-    color: #fcfcfc;
-    margin-bottom: 20px;
-  }
-
-  .typed-text {
-    font-size: medium;
-    white-space: nowrap;
-    overflow: hidden;
-    text-align: center;
   }
 </style>
