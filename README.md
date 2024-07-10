@@ -11,6 +11,9 @@
 ### Referencias: 
 - [https://github.com/sveltejs/svelte-scroller](https://github.com/sveltejs/svelte-scroller)
 - [Escalas de d3.js](https://d3js.org/d3-scale)
+- [Info Billboard](https://www.billboard.com/artist/taylor-swift/)
+- [Metacritic](https://www.metacritic.com/music)
+- [Info General](https://en.wikipedia.org/wiki/Taylor_Swift) 
 [API de Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
 
 ![thumbnail](fotoparareadme.png)
