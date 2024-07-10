@@ -10,7 +10,7 @@
   onMount(() => {
     setTimeout(() => {
       visible = true;
-    }, 5000); // 3000 ms = 3 segundos
+    }, 5000); // 5000 ms = 5 segundos
   });
 
   /* Variables para el scroller */
@@ -24,13 +24,12 @@
 
   /* Array de gráficos con títulos */
   let charts = [
-  { src: "images/img1.png", title: "Canciones en el Hot 100", text: "Texto adicional para Canciones en el Hot 100" },
-  { src: "images/img2.png", title: "Récords Rotos", text: "Texto adicional para Récords Rotos" },
-  { src: "images/img3.png", title: "Puntaje en Metacritic", text: "Texto adicional para Puntaje en Metacritic" },
-  { src: "images/img4.png", title: "Hits #1", text: "Texto adicional para Hits #1" },
-  { src: "images/img5.png", title: "Premios Ganados", text: "Texto adicional para Premios Ganados" }
-];
-
+    { src: "images/img1.png", title: "Canciones en el Hot 100", text: "Todas las canciones (31) de la versión titulada “The Anthology” del álbum entraron en el Billboard Hot 100, ocupando los 14 primeros puestos del mismo simultáneamente. Así se convirtió en la primera artista en la historia en alcanzar este logro." },
+    { src: "images/img2.png", title: "Récords Rotos", text: "Texto adicional para Récords Rotos" },
+    { src: "images/img3.png", title: "Puntaje en Metacritic", text: "Texto adicional para Puntaje en Metacritic" },
+    { src: "images/img4.png", title: "Hits #1", text: "Texto adicional para Hits #1" },
+    { src: "images/img5.png", title: "Premios Ganados", text: "Texto adicional para Premios Ganados" }
+  ];
 
   /* Array de miniaturas */
   let thumbnails = [
@@ -73,12 +72,24 @@
     }
   }
 
+  let dynamicText = "";
+  const dynamicTextContent = "Ahora que conoces sus logros, conocela a ella";
+  let dynamicTextIndex = 0;
+
+  function typeDynamicText() {
+    if (dynamicTextIndex < dynamicTextContent.length) {
+      dynamicText += dynamicTextContent.charAt(dynamicTextIndex);
+      dynamicTextIndex++;
+      setTimeout(typeDynamicText, typingDelay);
+    }
+  }
+
   onMount(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setTimeout(type, typingDelay);
+            setTimeout(type, typingDelay * 2); // Ajustar el retraso para el texto principal
             setInterval(() => {
               cursorVisible = !cursorVisible;
             }, 500);
@@ -89,6 +100,19 @@
       { threshold: 0.1 }
     );
     observer.observe(document.querySelector(".typing-container"));
+
+    const dynamicObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setTimeout(typeDynamicText, typingDelay * 2); // Ajustar el retraso para el texto dinámico
+            dynamicObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    dynamicObserver.observe(document.querySelector(".dynamic-typing-container"));
   });
 </script>
 
@@ -104,32 +128,40 @@
     <span class:hidden={!cursorVisible}>|</span>
   </div>
 
-<!-- Dentro del componente Scroller en tu archivo .svelte -->
-<Scroller
-  top={top}
-  threshold={threshold}
-  bottom={bottom}
-  bind:count={count}
-  bind:index={index}
-  bind:offset={offset}
-  bind:progress={progress}
->
-  <div slot="background" class="image_container">
-    <img src="{charts[index].src}" alt="chart {index}" class="charts" />
+  <!-- Dentro del componente Scroller en tu archivo .svelte -->
+  <Scroller
+    top={top}
+    threshold={threshold}
+    bottom={bottom}
+    bind:count={count}
+    bind:index={index}
+    bind:offset={offset}
+    bind:progress={progress}
+  >
+    <div slot="background" class="image_container">
+      <img src="{charts[index].src}" alt="chart {index}" class="charts" />
+    </div>
+    <div slot="foreground" class="foreground_container">
+      {#each charts as chart, i}
+        <section class="step_foreground">
+          <div class="title_container">
+            <p>{chart.title}</p>
+          </div>
+          <div class="text_container">
+            <div class="sticky_note">
+              {#if visible && index === i}
+                <p>{chart.text}</p>
+              {/if}
+            </div>
+          </div>
+        </section>
+      {/each}
+    </div>
+  </Scroller>
+
+  <div class="dynamic-typing-container">
+    <h2>{dynamicText}</h2>
   </div>
-  <div slot="foreground" class="foreground_container">
-    {#each charts as chart, i}
-      <section class="step_foreground">
-        <div class="title_container">
-          <p>{chart.title}</p>
-        </div>
-        <div class="text_container">
-          <p>{chart.text}</p>
-        </div>
-      </section>
-    {/each}
-  </div>
-</Scroller>
 
   <div class="thumbnails_container">
     <!-- Imágenes en miniatura -->
@@ -179,6 +211,13 @@
     opacity: 0;
   }
 
+  .dynamic-typing-container {
+    text-align: center;
+    font-family: 'Shadows Into Light Two', cursive;
+    color: #fcfcfc;
+    margin-bottom: 20px;
+  }
+
   .thumbnails_container {
     display: flex;
     flex-wrap: wrap;
@@ -208,48 +247,71 @@
     transform: scale(1.1);
   }
 
-/* Estilos para el scroller */
-.foreground_container {
-  pointer-events: none;
-  padding-left: 20%; /* Ajusta el padding para centrar los títulos */
-}
+  /* Estilos para el scroller */
+  .foreground_container {
+    pointer-events: none;
+    padding-left: 20%; /* Ajusta el padding para centrar los títulos */
+  }
 
-.step_foreground {
-  display: flex;
-  justify-content: space-between;  /*Alinear los elementos secundarios */
-  align-items: center;
-  height: 100vh;
-  color: rgb(245, 243, 243);
-  padding: 1em;
-  margin: 0 0 2em 0;
-}
+  .step_foreground {
+    display: flex;
+    justify-content: space-between;  /*Alinear los elementos secundarios */
+    align-items: center;
+    height: 100vh;
+    color: rgb(245, 243, 243);
+    padding: 1em;
+    padding-top: 56.35%;
+    margin: 0 0 2em 0;
+  }
 
-.title_container {
-  justify-content: start;
-  display: flex;
-  flex-direction: column; /* Alinear elementos verticalmente */
-  align-items: left; /* Alinear elementos a la izquierda */
-  width: 20%; /* Ancho del contenedor ajustable según necesidad */
-  padding: 20px;
-  background-color: rgba(14, 12, 12, 0.705);
-  text-align: center; /* Alinear texto al centro dentro de los contenedores */
-  margin-left: -260px;
-}
-.text_container{
-  justify-content: right;
-  display: flex;
-  flex-direction: column; /* Alinear elementos verticalmente */
-  align-items: flex-start; /* Alinear elementos a la izquierda */
-  width: 20%; /* Ancho del contenedor ajustable según necesidad */
-  padding: 20px;
-  background-color: rgba(14, 12, 12, 0.705);
-  text-align: center; /* Alinear texto al centro dentro de los contenedores */
-}
+  .title_container {
+    justify-content: center;
+    align-items: center; /* Centra el sticky note verticalmente */
+    display: flex;
+    flex-direction: column; /* Alinear elementos verticalmente */
+    align-items: left; /* Alinear elementos a la izquierda */
+    width: 30%; /* Ancho del contenedor ajustable según necesidad */
+    height: 90%;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0);
+    text-align: center; /* Alinear texto al centro dentro de los contenedores */
+    margin-left: -300px;
+    box-sizing: border-box; /* Incluye padding en las dimensiones totales */
+  }
 
-.title_container p, .text_container p {
-  color: #fdf9f9;
-  margin: 0; /* Eliminar márgenes por defecto */
-}
+  .text_container {
+    display: flex;
+    justify-content: center; /* Centra el sticky note horizontalmente */
+    align-items: center; /* Centra el sticky note verticalmente */
+    width: 30%; /* Ancho del contenedor ajustable según necesidad */
+    height: 90%;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0);
+    text-align: center; /* Alinear texto al centro dentro de los contenedores */
+    background-image: url('images/stickynote1.png'); /* Ruta de tu imagen de fondo */
+    background-size: contain; /* Ajusta el tamaño de la imagen para que no se recorte */
+    background-position: center; /* Posición centrada de la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    margin-right: -20px;
+    box-sizing: border-box; /* Incluye padding en las dimensiones totales */
+  }
+
+  .text_container p {
+    color: #000; /* Ajusta el color del texto para mejor legibilidad */
+    margin: 0; /* Eliminar márgenes por defecto */
+    width: 75%; /* Asegura que el texto no se desborde */
+    height: 100%;
+    font-size: small;
+    margin-left: 5px;
+  }
+  .title_container p{
+    color:#000;
+    margin: 0; /* Eliminar márgenes por defecto */
+    width: 75%; /* Asegura que el texto no se desborde */
+    height: 0%;
+    font-size: large;
+    
+  }
 
   .image_container {
     display: flex;
