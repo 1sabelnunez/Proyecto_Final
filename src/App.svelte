@@ -79,9 +79,8 @@
     }
   }
 
-  let dynamicText2 = "";
   const dynamicTextContent2 = "Scrolleá para conocer más datos sobre Taylor";
-  let dynamicTextIndex2 = 0;
+ 
 
   /* Variables y funciones para el texto dinámico de la introducción */
   const introTypedText = "Descubrí el extraordinario viaje musical de Taylor Swift a través de cada una de sus eras. En cada álbum marca una evolución en su arte, moldeando una sólida carrera y una conexión más profunda con sus fans, aumentando su impacto en la música contemporánea cada vez más.";
@@ -227,7 +226,10 @@
     </div>
   </Scroller>
 
-
+<div class="additional-images-container">
+    <img src="images/erasinfo.png" alt="Imagen 1" class="additional-image" />
+    <img src="images/erasinfo2.png" alt="Imagen 2" class="additional-image"/>
+</div>
 
 
   <div class="dynamic-typing-container">
@@ -247,6 +249,20 @@
       </div>
     {/each}
   </div>
+  <footer class="footer" >
+
+    <ul class="social-icon">
+      <li class="social-icon__item"><a class="social-icon__link" target="_blank" href="https://github.com/1sabelnunez/Proyecto_Final.git">
+          <ion-icon name="logo-github"></ion-icon>
+        </a></li>
+    </ul>
+    <h3 style="font-weight: bold;"> Final: Visualización de datos</h3>
+    <p> Isabel Nuñez y Estanislao Ríos Zgaib</p>
+    <p>Universidad Torcutato Di Tella  |  Licenciatura en Tecnología Digital</p>
+   
+  </footer>
+
+
 </main>
 
 <style>
@@ -312,7 +328,7 @@
     justify-content: center;
     text-align: center;
     margin-left: 45%;
-    margin-bottom: 5%;
+    margin-bottom: 10%;
   }
  .mastexto{
     color: #ffffff;
@@ -340,6 +356,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 20px 0;
+    margin-bottom: 10%;
   }
 
   .thumbnail_wrapper {
@@ -397,7 +414,7 @@
     background-color: #67879496; /* Color para el gráfico 3 */
   }
   .background-color-4 {
-    background-color: #12172493; /* Color para el gráfico 4 */
+    background-color: #010a1d93; /* Color para el gráfico 4 */
   }
 
   /* Otros estilos restantes */
@@ -457,23 +474,72 @@
     max-height: 100%;
     object-fit: contain;
   }
-  .additional-containers2 {
-    display: flex;
-    justify-content: center;
-    gap: 3%;
-    margin-top: 10%;
-    margin-bottom: 10%;
-  }
+  .additional-images-container {
+      text-align: center; /* Alinear al centro */
+      margin: 20px 0; /* Margen superior e inferior */
+      margin-bottom: 20%;
+      margin-top: 20%;
+}
 
-  .square-container2 {
-    width: 30%;
-    height: 200px;
-    margin-left: 5%;
-    background-color: #192031;
+  .additional-image {
+      max-width: 45%; /* Ancho máximo de las imágenes */
+      height: auto; /* Altura automática */
+      margin: 10px; /* Margen entre las imágenes */
+      display: inline-block; /* Mostrar en línea */
+      vertical-align: top; /* Alinear en la parte superior */
+}
+/* FOOTER */
+
+.footer {
+    position: relative;
+    min-width:100vh;
+    width: 100%;
+    height: 300px;
+    background: #242e47;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-family: 'Shadows Into Light Two', cursive;
+    flex-direction: column;
   }
+
+  .social-icon,
+  .menu {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 0;
+
+  }
+
+  .social-icon {
+    list-style-type: none; /* Para quitar el símbolo de item */
+    padding: 0;
+    margin: 0;
+  }
+
+  .social-icon__item {
+    display: inline-block; /* Para que los elementos estén en línea */
+   
+  }
+
+  .social-icon__link {
+    font-size: 2rem;
+    color: #09043a;
+    margin: 0 10px;
+    display: inline-block;
+    transition: 0.5s;
+  }
+  .social-icon__link:hover {
+    transform: translateY(-10px);
+  }
+
+
+  .footer p {
+    color: #836ff3;
+    margin: 10px 0 10px 0;
+  }
+
+  
+
 </style>
