@@ -24,34 +24,44 @@ body {
 
 .titulo{
   position: absolute; /* Posicionamiento absoluto */
-  top: 25%; /* Alinea la parte superior del título al centro verticalmente */
-  left: 300px; /* Ajusta la posición desde el borde izquierdo */
+  top: 33%; /* Alinea la parte superior del título al centro verticalmente */
+  left: 21%; /* Ajusta la posición desde el borde izquierdo */
   transform: translateY(-50%); /* Centra verticalmente el título */
-  width: 500px; /* Ancho de la imagen */
+  width: 35%; /* Ancho de la imagen */
 }
 
 .foto1{
   position: absolute; /* Posicionamiento absoluto */
-  top: 50%; /* Alinea la parte superior del título al centro verticalmente */
-  left: 850px; /* Ajusta la posición desde el borde izquierdo */
+  top: 55%; /* Alinea la parte superior del título al centro verticalmente */
+  left: 60%; /* Ajusta la posición desde el borde izquierdo */
   transform: translateY(-50%); /* Centra verticalmente el título */
-  width: 350px; /* Ancho de la imagen */
+  width: 25%; /* Ancho de la imagen */
 }
 
 .texto1{
   position: absolute; /* Posicionamiento absoluto */
-  top: 55%; /* Alinea la parte superior del título al centro verticalmente */
-  left: 300px; /* Ajusta la posición desde el borde izquierdo */
+  top: 60%; /* Alinea la parte superior del título al centro verticalmente */
+  left: 21.5%; /* Ajusta la posición desde el borde izquierdo */
   transform: translateY(-50%); /* Centra verticalmente el título */
-  width: 500px; /* Ancho de la imagen */
+  width: 34%; /* Ancho de la imagen */
 }
 
 .foto2{
   position: absolute; /* Posicionamiento absoluto */
-  top: 125%; /* Alinea la parte superior del título al centro verticalmente */
-  left: 300px; /* Ajusta la posición desde el borde izquierdo */
+  top: 140%; /* Alinea la parte superior del título al centro verticalmente */
+  left: 22%; /* Ajusta la posición desde el borde izquierdo */
   transform: translateY(-50%); /* Centra verticalmente el título */
-  width: 500px; /* Ancho de la imagen */
+  width: 28%; /* Ancho de la imagen */
+  padding-bottom: 15%;
+}
+
+.texto2{
+  position: absolute; /* Posicionamiento absoluto */
+  top: 135%; /* Alinea la parte superior del título al centro verticalmente */
+  left: 53%; /* Ajusta la posición desde el borde izquierdo */
+  transform: translateY(-50%); /* Centra verticalmente el título */
+  width: 34%; /* Ancho de la imagen */
+  padding-bottom: 13%; 
 }
 
   
