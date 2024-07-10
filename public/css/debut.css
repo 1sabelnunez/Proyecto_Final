@@ -1,7 +1,7 @@
 body {
   background-color: #839C74;
   margin: 0;
-  overflow: auto;
+  overflow: auto; 
 }
 
 .background-container {
@@ -64,4 +64,20 @@ body {
   padding-bottom: 13%; 
 }
 
+.home-button {
+  position: fixed;
+  bottom: 2%; /* Ajusta la posición del botón desde el borde inferior */
+  right: 43%; /* Ajusta la posición del botón desde el borde derecho */
+  padding: 10px 20px; /* Añade relleno dentro del botón */
+  background-color: #728666; /* Color de fondo del botón */
+  color: white; /* Color del texto del botón */
+  border: none; /* Sin borde */
+  border-radius: 10px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  z-index: 3; /* Asegura que el botón esté sobre fullscreen-image */
+}
+
+.home-button:hover {
+  background-color: #627258; /* Color de fondo al pasar sobre el botón */
+}
   

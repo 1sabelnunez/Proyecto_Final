@@ -4,40 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reputation</title>
-    <link rel="stylesheet" href="public/css/rep.css">
-    <style>
-        body {
-            display: flex;
-            justify-content: center; /* Centra horizontalmente el contenido */
-            align-items: center; /* Centra verticalmente el contenido */
-            height: 100vh; /* Ajusta el alto del cuerpo al 100% del viewport */
-            margin: 0; /* Elimina los márgenes predeterminados del cuerpo */
-        }
-        .container {
-            text-align: center; /* Centra el contenido dentro del contenedor */
-        }
-        h1 {
-            font-family:  'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; /* Fuente específica para el título */
-            font-size: 70px; /* Tamaño del título */
-            margin-bottom: 10px; /* Espacio inferior del título */
-        }
-        img {
-            margin-top: 30px;
-            max-width: 50%; /* Ajusta el tamaño máximo de la imagen */
-            height: auto; /* Mantiene la proporción original de la imagen */
-        }
-    </style>
+    <link rel="stylesheet" href="/css/rep.css">
 </head>
 <body>
-
-    <div class="background-container" style = "background-color: 839C74;">
+    <div class="background-container">
         <!-- Contenido de tu página -->
-        
     </div>
-    <div class="container">
-    <h1>Reputation</h1>
-    <p>Texto y contenido del álbum...</p>
-    <img src="images/trabajando.png" alt="Pronto...">
+    <img src="/images/borde2.png" alt="borde" class="fullscreen-image">
+    <img src="/images/titulorep.png" alt="titulo" class="titulo">
+    <img src="/images/foto1rep.png" alt="foto1" class="foto1">
+    <img src="/images/texto1rep.png" alt="texto1" class="texto1">
+    <img src="/images/foto2rep.png" alt="foto2" class="foto2">
+    <img src="/images/texto2rep.png" alt="texto2" class="texto2">
+    <img src="/images/texto3rep.png" alt="texto3" class="texto3">
 
+    <!-- Botón para redirigir a la página principal -->
+    <button class="home-button" onclick="window.location.href='app.svelte'">Ir a la página principal</button>
 </body>
 </html>
